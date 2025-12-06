@@ -1,11 +1,11 @@
-const net = require('net');
-const dgram = require('dgram');
+import net from 'node:net';
+import dgram from 'node:dgram';
 
 function genConnectionId() {
   return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
 }
 
-class FRPClient {
+export class FRPClient {
   constructor(config) {
     this.config = config;
     this.controlSocket = null;
@@ -737,5 +737,3 @@ class FRPClient {
     }
   }
 }
-
-module.exports = FRPClient;

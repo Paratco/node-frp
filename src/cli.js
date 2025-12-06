@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-const FRPServer = require('./server');
-const FRPClient = require('./client');
-const ConfigLoader = require('./config');
+import {FRPServer} from './server.js';
+import {FRPClient} from './client.js';
+import {ConfigLoader} from './config.js';
 
 const args = process.argv.slice(2);
 

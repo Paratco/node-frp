@@ -6,6 +6,7 @@
   "bin": {
     "node-frp": "./src/cli.js"
   },
+  "type": "module",
   "scripts": {
     "start": "node src/cli.js",
     "server": "node src/cli.js server",

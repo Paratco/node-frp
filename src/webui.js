@@ -1,12 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const cookieParser = require('cookie-parser');
-const rateLimit = require('express-rate-limit');
-const morgan = require('morgan');
-const path = require('path');
+import express from 'express';
+import bodyParser from 'body-parser';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import rateLimit from 'express-rate-limit';
+import morgan from 'morgan';
+import path from 'node:path';
+import crypto from 'crypto';
 
-class WebUIServer {
+export class WebUIServer {
   constructor(config, database, frpServer) {
     this.config = config;
     this.database = database;
@@ -26,7 +27,6 @@ class WebUIServer {
     this.app.use(cookieParser());
 
     // Generate a random session secret on startup
-    const crypto = require('crypto');
     const sessionSecret = crypto.randomBytes(32).toString('hex');
 
     this.app.use(session({
@@ -47,10 +47,10 @@ class WebUIServer {
 
     // View engine setup
     this.app.set('view engine', 'ejs');
-    this.app.set('views', path.join(__dirname, '..', 'web', 'views'));
+    this.app.set('views', path.join(import.meta.dirname, '..', 'web', 'views'));
 
     // Static files
-    this.app.use('/static', express.static(path.join(__dirname, '..', 'web', 'public')));
+    this.app.use('/static', express.static(path.join(import.meta.dirname, '..', 'web', 'public')));
 
     // Apply rate limiting to API routes
     this.app.use('/api', apiLimiter);
@@ -567,5 +567,3 @@ class WebUIServer {
     }
   }
 }
-
-module.exports = WebUIServer;

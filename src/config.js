@@ -1,7 +1,7 @@
-const fs = require('fs');
-const yaml = require('js-yaml');
+import fs from 'node:fs';
+import yaml from 'js-yaml';
 
-class ConfigLoader {
+export class ConfigLoader {
   static loadYAML(filePath) {
     try {
       const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -79,5 +79,3 @@ class ConfigLoader {
     return config;
   }
 }
-
-module.exports = ConfigLoader;

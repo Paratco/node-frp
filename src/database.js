@@ -1,8 +1,8 @@
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
-const crypto = require('crypto');
+import sqlite3 from 'sqlite3';
+import path from 'node:path';
+import crypto from 'node:crypto';
 
-class Database {
+export class Database {
   constructor(dbPath = './frp.db') {
     this.dbPath = dbPath;
     this.db = null;
@@ -528,5 +528,3 @@ class Database {
     });
   }
 }
-
-module.exports = Database;

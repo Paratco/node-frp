@@ -1,5 +1,7 @@
-const net = require("net");
-const dgram = require("dgram");
+import net from "node:net";
+import dgram from "node:dgram";
+import {Database} from './database.js';
+import {WebUIServer} from './webui.js';
 
 const VALID_PROXY_TYPES = new Set(['tcp', 'udp', 'socks5']);
 function normalizeProxyType(type) {
@@ -11,10 +13,9 @@ function genConnectionId() {
   // Low-collision ID: time + random segment
   return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
 }
-const Database = require('./database');
-const WebUIServer = require('./webui');
 
-class FRPServer {
+
+export class FRPServer {
   constructor(config) {
     this.config = config;
     this.controlServer = null;
@@ -1281,5 +1282,3 @@ class FRPServer {
     return status;
   }
 }
-
-module.exports = FRPServer;
